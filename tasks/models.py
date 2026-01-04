@@ -3,7 +3,7 @@
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-from project.models import Project
+from projects.models import Project
 
 class Task(models.Model):
     STATUS_CHOICES = (
@@ -19,7 +19,7 @@ class Task(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    completed = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -30,7 +30,7 @@ class Task(models.Model):
 
 class Task(models.Model):
     ...
-    project = models.ForeignKey(
+    projects = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
         related_name='tasks',
